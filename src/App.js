@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import Loading from "./Loading";
+import CV from "./CV";
 
-function App() {
+const App = () => {
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    changeLoading();
+  }, []);
+
+  const changeLoading = () => {
+    setTimeout(() => {
+      setLoading(true);
+    }, 3000);
+  };
+
+  if (!isLoading) {
+    return (
+      <Loading
+        spinOutside={{
+          color: "#09f",
+          animationTime: 2,
+        }}
+        spinMiddle={{
+          color: "#3cf",
+          animationTime: 2,
+        }}
+        spinInside={{
+          color: "#6ff",
+          animationTime: 2,
+        }}
+      />
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CV />  
+    </>
   );
-}
+};
 
 export default App;
